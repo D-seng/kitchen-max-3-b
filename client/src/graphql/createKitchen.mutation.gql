@@ -1,0 +1,27 @@
+mutation createKitchen(
+  $owner: ID!,
+  $address: String!,
+  $city: String!,
+  $burners: Int,
+  $imageUrl: [String],
+  $knives: Boolean,
+  $name: String!,
+  $rate: Int,
+  $utensils: Boolean,
+  $walkin: Boolean
+) {
+  createKitchen (
+    owner: $owner,
+    address: $address,
+    city: $city,
+    burners: $burners,
+    imageUrl: $imageUrl,
+    knives: $knives,
+    name: $name,
+    rate: $rate
+    utensils: $utensils,
+    walkin: $walkin,
+  ) {
+    name
+    }
+  }

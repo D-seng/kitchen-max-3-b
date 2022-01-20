@@ -1,0 +1,207 @@
+type User {
+  _id: ID
+  username: String!
+  email: String!
+  password: String!
+  avatar: String
+  joinDate: String
+  favorites: [Post]
+  kitchens: [Kitchen]
+  isCook: Boolean!
+  isKitchenOwner: Boolean!
+  appointments: [Appointment]
+}
+
+type UserTokenReturn {
+  userId: ID
+  username: String
+  isCook: Boolean
+  isKitchenOwner: Boolean
+}
+
+type Token {
+  token: String!
+}
+
+type Appointment {
+  _id: ID!
+  date: String!
+  meal: String!
+  details: String
+  kitchen: ID!
+  user: ID!
+}
+
+type UserAppointmentsSimple {
+  username: String
+  appointments: [ID!],
+  appointmentsK: [Appointment!]
+}
+
+type Post {
+  _id: ID
+  title: String!
+  imageUrl: String!
+  categories: [String]!
+  description: String!
+  createdDate: String
+  likes: Int
+  createdBy: User!
+  messages: [Message]
+}
+
+input Equipment {
+  walkin: Boolean!
+  utensils: Boolean!
+  knives: Boolean!
+}
+
+# input Date MealInput {
+#   date: String!
+#   meal: String!
+#   details: String
+# }
+
+type DateMeal {
+  _id: ID
+  date: String!
+  meal: String!
+  details: String
+}
+
+type Kitchen {
+  _id: ID!
+  owner: User!
+  address: String!
+  city: String!
+  burners: Int
+  imageUrl: [String]
+  knives: Boolean
+  name: String!
+  rate: Int
+  utensils: Boolean
+  walkin: Boolean
+  appointments: [Appointment]
+}
+
+type Message {
+  _id: ID
+  messageBody: String!
+  messageDate: String
+  messageUser: User!
+}
+
+type File {
+  filename: String!
+  mimetype: String!
+  encoding: String!
+}
+
+# type Meal {
+#   _id: ID
+#   owner: ID!
+#   date: String!
+#   time: String!
+#   mainCourse: String
+# }
+
+type Query {
+  getPosts: [Post!]
+  getKitchens: [Kitchen!]
+  getCurrentUser: User
+  getUploads: [File]
+  getCurrentUserFromToken(token: String!): UserTokenReturn!
+  selectKitchen(id: String!): Kitchen!
+  verifyUser(token: String!): User
+  getAppointments(date: [String!]): [Appointment!]
+}
+
+type Mutation {
+  deleteKitchen (
+    id: ID!
+  ): Kitchen!
+
+  # uploadFile (
+  #   file: Upload!
+  # ): File!
+
+  createPost(
+    title: String!,
+    imageUrl: String!,
+    categories: [String]!,
+    description: String!,
+    creatorId: ID!
+    ): Post!
+  createKitchen (
+    owner: ID!
+    address: String!
+    city: String!
+    burners: Int
+    imageUrl: [String]
+    knives: Boolean
+    name: String!
+    rate: Int
+    utensils: Boolean
+    walkin: Boolean
+  ): Kitchen!
+
+  createDateMeal (
+    date: String!
+    meal: String!
+    details: String
+  ): DateMeal!
+
+  createDateMeals (
+    dates: [String!]!
+    meals: [String!]!
+    details: [String]
+  ): [DateMeal!]!
+
+  createAppointments (
+    kitchen: ID!
+    user: ID!
+    dates: [String!]!
+    meals: [String!]!
+    details: [String]
+  ): [Appointment!]!
+
+  createAppointment (
+    kitchen: ID!
+    user: ID!
+    date: String!
+    meal: String!
+    details: String!
+  ): Appointment!
+
+  updateAppointment (
+    _id: ID!
+    kitchen: ID!
+    user: ID!
+    date: String!
+    meal: String!
+    details: String
+  ):Appointment!
+
+  createUser (
+    username: String!,
+    email: String!,
+    password: String!,
+    isCook: Boolean!,
+    isKitchenOwner: Boolean!,
+    avatar: String
+  ): Token
+
+  loginUser(
+    username: String!
+    password: String!
+  ): Token
+
+  updateUser(
+    username: String
+    password: String
+    email: String
+    avatar: String
+    isCook: Boolean!
+    isKitchenOwner: Boolean!
+  ): Token
+}

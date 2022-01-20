@@ -1,0 +1,21 @@
+query getKitchens {
+  getKitchens {
+    _id
+    name
+    address
+    knives
+    walkin
+    utensils
+    rate
+    imageUrl
+    burners
+    city
+    appointments {
+        date
+        meal
+        details
+        user
+    }
+
+  }
+}

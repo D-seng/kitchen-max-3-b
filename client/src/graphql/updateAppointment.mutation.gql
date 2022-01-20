@@ -1,0 +1,25 @@
+mutation updateAppointment(
+    $_id: ID!
+    $kitchen: ID!
+    $user: ID!
+    $date: String!
+    $meal: String!
+    $details: String!
+){
+  updateAppointment (
+    _id: $_id,
+    kitchen: $kitchen,
+    user: $user,
+    date: $date,
+    meal: $meal,
+    details: $details
+  )
+ {
+    _id,
+    user,
+    kitchen,
+    date,
+    meal,
+    details
+    }
+  }

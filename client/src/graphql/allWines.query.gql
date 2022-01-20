@@ -1,0 +1,7 @@
+query allWines {
+	allWines {
+		title
+		description
+		variety
+	}
+}

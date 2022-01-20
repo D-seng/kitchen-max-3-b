@@ -1,0 +1,8 @@
+  query getCurrentUserFromToken($token: String!) {
+    getCurrentUserFromToken(token: $token) {
+        username
+        userId
+        isCook
+        isKitchenOwner
+    }
+  }

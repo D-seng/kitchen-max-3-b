@@ -1,0 +1,6 @@
+
+  query verifyUser($token: String!) {
+    verifyUser(token: $token) {
+      validUser
+    }
+  }

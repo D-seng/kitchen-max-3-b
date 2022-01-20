@@ -1,0 +1,3 @@
+  mutation updateAppointmentsCache($id: ID!) {
+    checkItem(id: $id) @client
+  }
