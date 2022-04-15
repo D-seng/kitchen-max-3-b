@@ -1,2 +1,7 @@
+<<<<<<< HEAD
 # Don't track content of these folders
 node_modules/
+=======
+node_modules/
+client/node_modules/
+>>>>>>> 6557139cf6fce144f08db4b53e18ae0e60c1282d
