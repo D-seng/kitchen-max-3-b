@@ -3,6 +3,8 @@
 @tailwind utilities;
 
 .hov-dropdown-base {
-  @apply bg-yellow-100 border-gray-500 rounded-lg;
+    @apply bg-yellow-100 border-gray-500 rounded-lg;
 }
-.hov:hover { @apply hov-dropdown-base }
+.hov:hover {
+    @apply hov-dropdown-base;
+}

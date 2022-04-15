@@ -4,20 +4,19 @@ mutation createAppointment(
     $date: String!
     $meal: String!
     $details: String!
-){
-  createAppointment (
-    kitchen: $kitchen,
-    user: $user,
-    date: $date,
-    meal: $meal,
-    details: $details
-  )
- {
-    _id,
-    user,
-    kitchen,
-    date,
-    meal,
-    details
+) {
+    createAppointment(
+        kitchen: $kitchen
+        user: $user
+        date: $date
+        meal: $meal
+        details: $details
+    ) {
+        _id
+        user
+        kitchen
+        date
+        meal
+        details
     }
-  }
+}

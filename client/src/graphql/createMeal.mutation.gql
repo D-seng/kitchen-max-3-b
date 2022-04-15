@@ -1,15 +1,15 @@
 mutation createMeal(
-  $owner: ID!,
-  $date: String!,
-  $time: String!,
-  $mainCourse: String!
+    $owner: ID!
+    $date: String!
+    $time: String!
+    $mainCourse: String!
 ) {
-  createMeal (
-    owner: $owner,
-    date: $date,
-    time: $time,
-    mainCourse: $mainCourse
-  ) {
-    meal
+    createMeal(
+        owner: $owner
+        date: $date
+        time: $time
+        mainCourse: $mainCourse
+    ) {
+        meal
     }
-  }
+}

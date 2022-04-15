@@ -1,15 +1,25 @@
 import { createApp, provide, h } from 'vue'
-import { DefaultApolloClient, provideApolloClient } from '@vue/apollo-composable'
+import {
+  DefaultApolloClient,
+  provideApolloClient
+} from '@vue/apollo-composable'
 import App from './App.vue'
 import router from './router'
-import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client/core'
+import {
+  ApolloClient,
+  createHttpLink,
+  InMemoryCache
+} from '@apollo/client/core'
 import './index.css'
 import gql from 'graphql-tag'
+const components = import.meta.globEager('./components/*.vue')
+console.log('components')
+console.log(components)
 
 //  HTTP connection to the API
 const httpLink = createHttpLink({
   //  You should use an absolute URL here
-  uri: 'http:localhost:4000/graphql'
+  uri: 'http://localhost:4000/graphql'
 })
 
 //  Cache implementation
@@ -17,53 +27,53 @@ const cache = new InMemoryCache()
 
 console.log(cache)
 const typeDefs = gql`
-  type Appointment {
-    _id: ID!
-    date: String!
-    meal: String!
-    details: String!
-    kitchen: ID!
-    user: ID!
-  }
+    type Appointment {
+        _id: ID!
+        date: String!
+        meal: String!
+        details: String!
+        kitchen: ID!
+        user: ID!
+    }
 
- type Mutation {
-   modifyAppt(id: ID!, meal: String, details: String): Item,
-   moveApptDate(id: ID!, date: String!): Meal
- }
+    type Mutation {
+        modifyAppt(id: ID!, meal: String, details: String): Item
+        moveApptDate(id: ID!, date: String!): Meal
+    }
 
-  type Query {
-    getAppointments(date: [String!]): Appointment
-  }`
+    type Query {
+        getAppointments(date: [String!]): Appointment
+    }
+`
 
 const mealFieldsQuery = gql`
-   {
-     mealFields @client {
-       id
-       details
-       meal
-       date
-     }
-   }
- `
-const getAppointments = gql`
-query getAppointments ($date: [String!]) {
-  getAppointments @client (date: $date)
     {
-        _id
-        kitchen
-        user
-        date
-        meal
-        details
-      }
-}`
+        mealFields @client {
+            id
+            details
+            meal
+            date
+        }
+    }
+`
+const getAppointments = gql`
+    query getAppointments($date: [String!]) {
+        getAppointments @client(date: $date) {
+            _id
+            kitchen
+            user
+            date
+            meal
+            details
+        }
+    }
+`
 
 const resolvers = {
   Mutation: {
     moveApptDate: (_, { id }, { cache }) => {
-      debugger
       const data = cache.readQuery({ query: mealFieldsQuery })
-      const currentMeal = data.mealFields.find(item => item.id === id)
+      const currentMeal = data.mealFields.find((item) => item.id === id)
       currentMeal.date = '2021-10-31'
       cache.writeQuery({ query: mealFieldsQuery, data })
       return currentMeal.date
@@ -84,6 +94,11 @@ const app = createApp({
     provideApolloClient(apolloClient)
   },
   render: () => h(App)
+})
+
+Object.entries(components).forEach(([path, definition]) => {
+  const componentName = path.split('/').pop().replace(/\.\w+$/, '')
+  app.component(componentName, definition.default)
 })
 
 app.use(router).mount('#app')

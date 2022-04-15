@@ -1,16 +1,13 @@
 query getAppointments($date: [String!]) {
-  getAppointments(date: $date)
-    {
+    getAppointments(date: $date) {
         _id
         kitchen
         user
         date
         meal
         details
-      }
+    }
 }
-
-
 
 # _id: $_id,
 #     kitchen: $kitchen,
@@ -19,16 +16,14 @@ query getAppointments($date: [String!]) {
 #     meal: $meal,
 #     details: $details
 
-
-  #       query getCurrentUserFromToken($token: String!) {
-  #   getCurrentUserFromToken(token: $token) {
-  #       username
-  #       userId
-  #       isCook
-  #       isKitchenOwner
-  #   }
-  # }
-
+#       query getCurrentUserFromToken($token: String!) {
+#   getCurrentUserFromToken(token: $token) {
+#       username
+#       userId
+#       isCook
+#       isKitchenOwner
+#   }
+# }
 
 # const SELECT_KITCHEN = gql`
 #   query($id: String!){

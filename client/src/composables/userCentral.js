@@ -3,13 +3,12 @@ import { reactive } from 'vue'
 var token = ''
 
 const userFunctions = function () {
-  return {
-  }
+    return {}
 }
 
 const userState = {
-  token: '',
-  userId: null
+    token: '',
+    userId: null
 }
 
 export { userFunctions, userState }

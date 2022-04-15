@@ -1,6 +1,5 @@
-
-  query verifyUser($token: String!) {
+query verifyUser($token: String!) {
     verifyUser(token: $token) {
-      validUser
+        validUser
     }
-  }
+}

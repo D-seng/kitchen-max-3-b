@@ -1,9 +1,6 @@
-mutation loginUser ($username: String!,
-  $password: String!) {
-  loginUser(
-    username: $username,
-    password: $password) @connection(key: "login", filter: ["username"])  {
-
-    token
+mutation loginUser($username: String!, $password: String!) {
+    loginUser(username: $username, password: $password)
+        @connection(key: "login", filter: ["username"]) {
+        token
     }
 }

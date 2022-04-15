@@ -6,67 +6,17 @@ import getAppointments from '../graphql/getAppointments.query.gql'
 
 // wrap everything in a function to make scope work.
 
-const state = ref({ meal: { _id: 1 }, newMeal: {}, modalVisible: false, modMode: '', date: '', year: '', month: '' })
+const state = ref({
+  meal: { _id: 1 },
+  newMeal: {},
+  modalVisible: false,
+  modMode: '',
+  date: '',
+  year: '',
+  month: ''
+})
 
 export const useMealSelection = function () {
-  function submitAppt (myAppt) {
-    debugger
-    // const { mutate: sendAppts, onDone } =
-    //    useMutation(updateAppointment,
-    //      () => ({
-    //        variables: {
-    //          kitchen: '5f431a40ad55d84d8ce55bff',
-    //          user: '5f8127479347aa10f632b87e',
-    //          _id: state.value.newMeal._id,
-    //          date: state.value.newMeal.date,
-    //          meal: state.value.newMeal.meal,
-    //          details: state.value.newMeal.details
-    //        }
-    //      }))
-    debugger
-    console.log(myAppt)
-
-    const { mutate: sendAppts, onDone } =
-       useMutation(updateAppointment,
-         () => ({
-           variables: {
-             _id: myAppt._id,
-             date: myAppt.date,
-             meal: myAppt.meal,
-             details: myAppt.details,
-             kitchen: myAppt.kitchen,
-             user: myAppt.user
-           },
-           update: (store, {}) => {
-             debugger
-             const idToRemove = myAppt._id
-             // store.modify
-             //  store.modify({
-             //    id: store.identify(myAppt)
-             //  })
-             const data = store.readQuery({ query: getAppointments })
-             console.log('**********')
-             console.log(data)
-             console.dir(store)
-           }
-         }))
-    debugger
-    // console.log(meal)
-    try {
-      sendAppts()
-      // debugger
-      onDone(result => {
-        window.localStorage.setItem('appt', 'fake appt')
-
-        // router.push('/')
-      })
-    } catch {
-      err => {
-        console.log(err)
-      }
-    }
-  }
-
   const getModalVisibility = computed(() => state.value.modalVisible)
   const getMeal = computed(() => state.value.meal)
   const getModMode = computed(() => state.value.modMode)
@@ -119,7 +69,6 @@ export const useMealSelection = function () {
     closeModal,
     setMeal,
     getMeal,
-    submitAppt,
     setNewMeal,
     calDays,
     setModMode,

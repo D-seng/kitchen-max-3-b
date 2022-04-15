@@ -1,11 +1,10 @@
 query getAllAppointments {
-  getAllAppointments
-    {
+    getAllAppointments {
         _id
         kitchen
         user
         date
         meal
         details
-      }
+    }
 }

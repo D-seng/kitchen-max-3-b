@@ -1,5 +1,5 @@
-mutation deleteKitchen ($id: ID!) {
-  deleteKitchen(id: $id) {
-    name
-  }
+mutation deleteKitchen($id: ID!) {
+    deleteKitchen(id: $id) {
+        name
+    }
 }
